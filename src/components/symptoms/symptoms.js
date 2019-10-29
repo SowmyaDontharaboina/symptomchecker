@@ -2,6 +2,7 @@ import HorizontalStepper from 'vue-stepper';
 
 // This components will have the content for each stepper step.
 import StepOne from './StepOne.vue';
+import StepTwo from './StepTwo.vue';
 import StepThree from './StepThree.vue';
 import StepFour from './StepFour.vue';
 
@@ -24,6 +25,15 @@ export default {
                 {
                     icon: 'person',
                     name: 'second',
+                    title: 'Symptom Checker',
+                    subtitle: '',
+                    component: StepTwo,
+                    completed: false
+
+                },
+                {
+                    icon: 'person',
+                    name: 'third',
                     title: 'Questions',
                     subtitle: '',
                     component: StepThree,
@@ -32,7 +42,7 @@ export default {
                 },
                 {
                     icon: 'report_problem',
-                    name: 'third',
+                    name: 'fourth',
                     title: 'Interview',
                     subtitle: '',
                     component: StepFour,
