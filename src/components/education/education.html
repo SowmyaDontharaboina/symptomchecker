@@ -1,0 +1,20 @@
+<div class="container">
+        <v-app id="inspire" style="
+        min-height: 0;
+    ">
+          <div>
+            <v-alert type="warning" v-if="getResult < 3">
+                <b>
+                    May require medical attention
+                </b><br/>
+                Symptoms you’ve reported are rarely sign of a severe condition. However, if you are concerned about your health or your symptoms persist or worsen, we advise to contact a medical professional.
+            </v-alert>
+            <v-alert type="error" v-if="getResult >= 3">
+              <b>
+                Immediate medical attention recommended
+              </b><br/>
+              Immediate contact with a medical professional or emergency services is advised
+            </v-alert>
+          </div>
+        </v-app>
+</div>

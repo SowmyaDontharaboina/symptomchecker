@@ -64,7 +64,7 @@ export default {
         },
         // Executed when @stepper-finished event is triggered
         finish(payload) {
-            this.$router.push('nearesDoctors')
+            this.$router.push('education')
         }
     }
 }

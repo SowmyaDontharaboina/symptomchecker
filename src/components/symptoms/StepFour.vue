@@ -18,7 +18,7 @@
                   v-bind:class="{ selected: activeIndex === childindex }"
                   text
                   v-for="(answer,childindex) in healthyQuestion.answers"
-                  @click="submitQuestions(index+1,childindex)"
+                  @click="submitQuestions(index+1,childindex,answer)"
                   :key="childindex"
                 >{{ answer }}</v-btn>
               </v-card-actions>
@@ -30,6 +30,7 @@
   </div>
 </template>
 <script>
+import { mapActions } from "vuex";
 import db from "@/firebase/init";
 export default {
   name: "Navbar",
@@ -41,7 +42,9 @@ export default {
     };
   },
   methods: {
-    submitQuestions(index, childindex) {
+    ...mapActions(["PUSH_ANSWER"]),
+    submitQuestions(index, childindex,answer) {
+      this.PUSH_ANSWER(answer);
       if (this.healthQuestions.length === index) {
         this.activeIndex = childindex;
         this.$emit("can-continue", { value: true });
