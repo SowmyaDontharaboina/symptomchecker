@@ -1,5 +1,4 @@
 import HorizontalStepper from 'vue-stepper';
-import Router from 'vue-router';
 
 // This components will have the content for each stepper step.
 import StepOne from './StepOne.vue';

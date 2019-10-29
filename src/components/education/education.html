@@ -1,7 +1,5 @@
 <div class="container">
-        <v-app id="inspire" style="
-        min-height: 0;
-    ">
+        <v-app id="inspire">
           <div>
             <v-alert type="warning" v-if="getResult < 3">
                 <b>
@@ -15,6 +13,26 @@
               </b><br/>
               Immediate contact with a medical professional or emergency services is advised
             </v-alert>
+            <div>
+              <div class="card">
+  
+                <div class="card-con">
+                  <h4><b>Results:</b></h4> 
+                  <p>Please note that the list below may not be complete and is provided solely for informational purposes and is not a qualified medical opinion.</p> 
+                  <div v-for="(symptom,index) in symptomList"
+                  v-on:click="showDetail(index)"
+                  >
+                    <hr/>
+                    <strong>{{ symptom.name }}.</strong>
+                    <div>{{ symptom.Details}}</div>
+                    <hr/>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
+          <div class="my-2">
+              <v-btn x-large color="success" dark v-on:click="navigate">Consult a doctor</v-btn>
+            </div>
         </v-app>
 </div>

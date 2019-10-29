@@ -5,13 +5,21 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    result: []
+    result: [],
+    symptoms:['cough','fever']
   },
   getters: {
     getResult: function (state){
       return state.result.filter(function(value){
         return value === 'Yes';
       }).length;
+    },
+    getSymptoms: function(state) {
+      const obj={};
+      obj.cough = state.symptoms.includes('cough');
+      obj.fever = state.symptoms.includes('fever');
+      console.log(obj);
+      return obj;
     }
   },
   mutations: {

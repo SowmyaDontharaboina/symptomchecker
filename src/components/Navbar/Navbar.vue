@@ -15,6 +15,7 @@
     </div>
 </template>
 <script>
+import { EventBus } from '../../main';
 export default {
   name: 'Navbar',
   data() {
@@ -22,7 +23,8 @@ export default {
 
     };
   },
-}
+  computed: {
+},
 < /script>
 <style scoped>
 .navbar {

@@ -2,7 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import welcome from '../components/welcome/welcome.vue';
 import education from '../components/education/education.vue';
-import nearesDoctors from '../components/nearestDoctors/nearestDoctors.vue';
+import doctors from '../components/doctors/doctors.vue'
 import symptoms from '../components/symptoms/symptoms.vue';
 import questions from '../components/questions/questions.vue';
 
@@ -26,8 +26,8 @@ const routes = [
   },
   {
     path: '/nearestDoctors',
-    name: 'nearesDoctors',
-    component: nearesDoctors,
+    name: 'nearestDoctors',
+    component: doctors,
   },
   {
     path: '/symptoms',

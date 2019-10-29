@@ -1,3 +1,8 @@
-.v-application--wrap {
-    min-height: 0;
-}
+div {
+    margin-bottom: 15px;
+    padding: 4px 12px;
+  }
+  .v-application .info {
+      background-color: cyan !important;
+      border-left: 6px solid #2196F3;
+  }
