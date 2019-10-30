@@ -3,7 +3,7 @@
     <h2>Add your symptoms</h2>
     <div class="symptoms-details">
       <h4>Please use the search or click on the body model.</h4>
-      <div class="autocomplete">
+      <div class="col-lg-12 autocomplete">
         <input
           type="text"
           placeholder="Search, e.g. headache"

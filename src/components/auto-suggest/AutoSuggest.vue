@@ -1,13 +1,68 @@
 <template>
   <div>
-    <div v-for="(value,index) in symptom" v-bind:key="index">{{value}}</div>
+    <div class="col-lg-10 col-md-12 col-sm-12">
+      <ul class="symptom-list">
+        <li v-for="(value,index) in symptom" v-bind:key="index">
+          <span @click="onSelection(value)">{{value}}</span>
+        </li>
+      </ul>
+    </div>
+    <div class="col-lg-10 col-md-12 col-sm-12">
+      <div
+        :class="{selectedlist: active}"
+        v-for="(value,index) in symptomSelected"
+        v-bind:key="index"
+      >
+        {{value}}
+        <i class="remove fa fa-times" @click="removeValue(value)"></i>
+      </div>
+    </div>
   </div>
 </template>
 <script>
 export default {
   name: "AutoSuggest",
-  props: ["symptom"]
+  props: ["symptom"],
+  data() {
+    return {
+      symptomSelected: [],
+      active: false
+    };
+  },
+  methods: {
+    onSelection(val) {
+      if (val) {
+        this.active = true;
+        this.symptomSelected.push(val);
+      }
+    },
+    removeValue(val) {
+      this.symptomSelected.filter((ele, index) => {
+        if (ele === val) {
+          this.symptomSelected.splice(index, 1);
+        }
+      });
+    }
+  }
 };
 </script>
 <style scoped>
+.symptom-list {
+  text-align: left;
+}
+.symptom-list li {
+  padding-bottom: 10px;
+  cursor: pointer;
+}
+.selectedlist {
+  background: #1576d1;
+  color: white;
+  padding: 6px 14px 6px 12px;
+  border-radius: 16px;
+  display: inline-block;
+  float: left;
+}
+.remove {
+  padding-left: 5px;
+}
 </style>
