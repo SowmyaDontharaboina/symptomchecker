@@ -1,8 +1,8 @@
 <template>
   <div>
-    <v-app id="details">
+    <v-app class="wizard-one" id="details">
       <form name="form-details">
-        <div class="patient-gender" v-bind:class="{activeDiv: isActive,notactive: prevSection}">
+        <div class="patient-gender" v-bind:class="{activeDiv: isActive,notactive: prevSection}" v-show="showFirst">
           <h2 class="header">Please select your sex</h2>
           <label
             class="gender"
@@ -14,18 +14,18 @@
               type="radio"
               name="gender"
               :value="item.gender"
-              @click="onGenderSelection(item, $event)"
+              @change="onGenderSelection(item, $event)"
             />
             <img
-              width="250"
-              height="250"
+              width="150"
+              height="150"
               :src="require(`@/assets/${item.gender}.png`)"
               :alt="item.gender"
             />
             <span>{{item.gender}}</span>
           </label>
         </div>
-        <div class="patient-age" v-bind:class="{notactive: prevSection}">
+        <div class="patient-age" v-bind:class="{notactive: prevSection}" v-show="showSecond">
           <div class="slidecontainer">
             <h2 class="header">Please select your age</h2>
             <i class="fa fa-plus-circle" aria-hidden="true"></i>
@@ -73,6 +73,8 @@ export default {
   name: "StepOne",
   data() {
     return {
+      showFirst: true,
+      showSecond: false,
       isActive: false,
       isActiveCheck: false,
       prevSection: false,
@@ -104,6 +106,9 @@ export default {
       } else {
         $event.target.parentElement.previousSibling.classList.remove("active");
       }
+      //this.showFirst = false;
+      this.showSecond = true;
+      this.$emit("can-continue", { value: true });
       // this.prevSection = !this.prevSection;
       // this.isActive = !this.isActive;
       //this.nextSection(false, true);
@@ -113,12 +118,20 @@ export default {
       this.nextActive();
     },
     addValue() {
-      this.ageValue = parseInt(this.ageValue) + 1;
-      this.nextActive();
+      if(this.ageValue < 100) {
+        this.ageValue = parseInt(this.ageValue) + 1;
+        this.nextActive();
+      }
+    },
+    goBack () {
+      this.showFirst = true;
+      this.showSecond = false;
     },
     minusValue() {
-      this.ageValue = parseInt(this.ageValue) - 1;
-      this.nextActive();
+      if(this.ageValue > 1) {
+        this.ageValue = parseInt(this.ageValue) - 1;
+        this.nextActive();
+      }
     },
     nextActive() {
       if (this.genderValue) {
@@ -135,15 +148,22 @@ export default {
   }
 };
 </script>
-    <style>
+    <style scoped>
 .v-card__actions .action {
   display: inline-block !important;
 }
+
 .notactive {
   display: none;
 }
+.patient-gender {
+  margin-bottom: 50px;
+}
 .activeDiv {
   display: block;
+}
+.patient-age {
+  margin-bottom: 100px;
 }
 .action {
   align: center;

@@ -4,11 +4,11 @@
     <v-simple-table height="300px">
       <template v-slot:default>
         <tbody>
-          <tr v-for="question in questions" :key="question.question">
+          <tr v-for="(question, indexVal) in questions" :key="question.question">
             <td>{{ question.question }}</td>
             <td v-for="(option, index) in question.options" :key="index">
-              <input class="form-check-input" type="radio" :name="index" id="index" value="option1" />
-              <label class="form-check-label" for="index">{{ option }}</label>
+              <input class="form-check-input" type="radio" :name="`option${indexVal}`" :id="`option${index}`" :value="option" />
+              <label class="form-check-label" :for="`option${index}`">{{ option }}</label>
             </td>
           </tr>
         </tbody>
@@ -46,3 +46,9 @@ export default {
   }
 };
 </script>
+<style scoped>
+  [type="radio"]:not(:checked), [type="radio"]:checked {
+    opacity: 1;
+    pointer-events: all;
+  }
+</style>

@@ -1,38 +1,54 @@
-<div class="container">
-        <v-app id="inspire">
-          <div>
-            <v-alert type="warning" v-if="getResult < 3">
-                <b>
-                    May require medical attention
-                </b><br/>
-                Symptoms you’ve reported are rarely sign of a severe condition. However, if you are concerned about your health or your symptoms persist or worsen, we advise to contact a medical professional.
-            </v-alert>
-            <v-alert type="error" v-if="getResult >= 3">
-              <b>
-                Immediate medical attention recommended
-              </b><br/>
-              Immediate contact with a medical professional or emergency services is advised
-            </v-alert>
-            <div>
-              <div class="card">
-  
-                <div class="card-con">
-                  <h4><b>Results:</b></h4> 
-                  <p>Please note that the list below may not be complete and is provided solely for informational purposes and is not a qualified medical opinion.</p> 
-                  <div v-for="(symptom,index) in symptomList"
-                  v-on:click="showDetail(index)"
-                  >
-                    <hr/>
-                    <strong>{{ symptom.name }}.</strong>
-                    <div>{{ symptom.Details}}</div>
-                    <hr/>
-                  </div>
-                </div>
+<div class="container col-lg-12">
+  <v-app id="inspire">
+    <div>
+      <v-alert type="warning" v-if="getResult < 3">
+        <b>
+          May require medical attention
+        </b><br />
+        Symptoms you’ve reported are rarely sign of a severe condition. However, if you are concerned about your health
+        or your symptoms persist or worsen, we advise to contact a medical professional.
+      </v-alert>
+
+      <v-alert type="error" v-if="getResult >= 3">
+        <b>
+          Immediate medical attention recommended
+        </b><br />
+        Immediate contact with a medical professional or emergency services is advised
+      </v-alert>
+      <div class="row">
+        <div class="col-lg-9">
+          <div class="card">
+
+            <div class="card-con">
+              <h4><b>Results:</b></h4>
+              <p>Please note that the list below may not be complete and is provided solely for informational purposes
+                and
+                is not a qualified medical opinion.</p>
+              <div v-for="(symptom,index) in symptomList" v-on:click="showDetail(index)">
+                <hr />
+                <strong>{{ symptom.name }}.</strong>
+                <div>{{ symptom.Details}}</div>
+                <hr />
               </div>
             </div>
           </div>
-          <div class="my-2">
-              <v-btn x-large color="success" dark v-on:click="navigate">Consult a doctor</v-btn>
+        </div>
+        <div class="col-lg-3">
+          <div class="card">
+            <div class="card-con">
+              <h4 class="actions"><b class="text">Action to be taken</b><i class="fa fa-exclamation-triangle"></i></h4>
+              <div class="my-2">
+                <v-btn x-large color="success" dark v-on:click="navigate">Consult a doctor<i
+                    class="fa fa-stethoscope icon"></i></v-btn>
+              </div>
+              <div class="my-2">
+                <v-btn x-large color="success" dark v-on:click="navigateto">Book an ambulence <i
+                    class="fa fa-ambulance icon"></i></v-btn>
+              </div>
             </div>
-        </v-app>
+          </div>
+        </div>
+      </div>
+    </div>
+  </v-app>
 </div>

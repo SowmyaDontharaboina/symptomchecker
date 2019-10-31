@@ -38,6 +38,7 @@ export default {
       this.symptoms.filter(ele => {
         if (ele.includes(value) && value != "") {
           this.filteredValues.push(ele);
+          this.$emit("can-continue", { value: true });
         }
       });
     }

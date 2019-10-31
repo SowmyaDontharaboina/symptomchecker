@@ -34,7 +34,8 @@ export default {
       if (val) {
         this.active = true;
         this.symptomSelected.push(val);
-      }
+        this.$emit("can-continue", { value: true });
+      } 
     },
     removeValue(val) {
       this.symptomSelected.filter((ele, index) => {
@@ -42,7 +43,13 @@ export default {
           this.symptomSelected.splice(index, 1);
         }
       });
+      if(this.symptomSelected.length <= 0){
+        this.$emit("can-continue", { value: false });
+      }
     }
+  },
+  mounted() {
+    this.$emit("can-continue", { value: false });
   }
 };
 </script>

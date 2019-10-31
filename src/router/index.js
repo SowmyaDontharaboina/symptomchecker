@@ -4,6 +4,7 @@ import welcome from '../components/welcome/welcome.vue';
 import education from '../components/education/education.vue';
 import doctors from '../components/doctors/doctors.vue'
 import symptoms from '../components/symptoms/symptoms.vue';
+import ambulence from '../components/ambulence/ambulence.vue';
 import questions from '../components/questions/questions.vue';
 
 Vue.use(VueRouter);
@@ -28,6 +29,11 @@ const routes = [
     path: '/nearestDoctors',
     name: 'nearestDoctors',
     component: doctors,
+  },
+  {
+    path: '/ambulence',
+    name: 'ambulence',
+    component: ambulence,
   },
   {
     path: '/symptoms',
