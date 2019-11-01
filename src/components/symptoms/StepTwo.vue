@@ -9,9 +9,6 @@
           name="search"
           v-on:keyup="autoComplete($event)"
         />
-        <button class="search">
-          <i class="fa fa-search"></i>
-        </button>
       </div>
       <AutoSuggest v-bind:symptom="filteredValues"></AutoSuggest>
     </div>
@@ -60,7 +57,6 @@ export default {
 </script>
 <style scoped>
 .symptoms-details {
-  width: 50%;
   margin: 20px;
 }
 .subtitle {
