@@ -1,5 +1,13 @@
 <template>
   <div>
+  <nav class="nav-extended indigo darken-2">
+        <div class="nav-content">
+          <router-link to="">
+            <span class="nav-title"> Search for hospitals </span>
+          </router-link>
+          </a>
+        </div>
+      </nav>
     <span>Search Hospital</span>
     <div class="container ambulence-details">
       <div class="col-lg-12 autocomplete">
