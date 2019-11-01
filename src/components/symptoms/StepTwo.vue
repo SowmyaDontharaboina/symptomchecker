@@ -1,7 +1,7 @@
 <template>
   <form>
     <h2 class="header">Please add your symptoms</h2>
-    <div class="symptoms-details">
+    <div class>
       <div class="col-lg-12 autocomplete">
         <input
           type="text"
@@ -58,6 +58,7 @@ export default {
 <style scoped>
 .symptoms-details {
   margin: 20px;
+  width: 50%;
 }
 .subtitle {
   font-size: 22px;

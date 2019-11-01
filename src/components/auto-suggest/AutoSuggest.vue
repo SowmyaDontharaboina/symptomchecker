@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="col-lg-10 col-md-12 col-sm-12 list">
+    <div>
       <ul class="symptom-list list-group">
         <li
           v-for="(value,index) in symptom"
@@ -10,7 +10,7 @@
         >{{value}}</li>
       </ul>
     </div>
-    <div class="col-lg-10 col-md-12 col-sm-12">
+    <div class>
       <div
         :class="{selectedlist: active}"
         v-for="(value,index) in symptomSelected"
@@ -74,6 +74,8 @@ export default {
   border-radius: 16px;
   display: inline-block;
   float: left;
+  margin-left: 50px;
+  margin-top: 20px;
 }
 .remove {
   padding-left: 5px;
