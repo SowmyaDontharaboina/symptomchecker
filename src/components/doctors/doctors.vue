@@ -1,5 +1,13 @@
 <template>
   <div id="app" class="container">
+  <nav class="nav-extended indigo darken-2">
+        <div class="nav-content">
+          <router-link to="">
+            <span class="nav-title"> Search Doctors </span>
+          </router-link>
+          </a>
+        </div>
+      </nav>
     <div>
       <div class="container">
         <span class="location">Search Location</span>
