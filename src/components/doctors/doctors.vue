@@ -40,7 +40,9 @@ export default {
   },
   methods: {
       bookAppointment() {
-          this.$swal('Appointment', 'You Successfully booked appointment', 'OK');
+          this.$swal('Appointment', 'You Successfully booked appointment', 'OK').then(result => {
+        this.$router.push('/')
+      });
       }
   },
   created() {
