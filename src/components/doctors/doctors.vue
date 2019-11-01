@@ -1,8 +1,8 @@
 <template>
   <div id="app" class="container">
     <div>
-      <div class="container doctor-details">
-        <span>Search Location</span>
+      <div class="container">
+        <span class="location">Search Location</span>
         <div class="col-lg-12 autocomplete">
           <input
             type="text"
@@ -10,9 +10,6 @@
             name="search"
             v-on:keyup="autoComplete($event)"
           />
-          <button class="search" type="submit">
-            <i class="fa fa-search"></i>
-          </button>
         </div>
         <div class="col-lg-10 col-md-12 col-sm-12">
           <ul class="hospital-list">
@@ -200,6 +197,9 @@ export default {
 .card {
   display: inline-block !important;
 }
+.location {
+  font-size: 40px;
+}
 .hospital-list {
   text-align: left;
 }
@@ -212,6 +212,9 @@ export default {
 }
 .name-doc {
   font-weight: 500;
+}
+.container {
+  margin-top: 50px;
 }
 .btn-primary {
   background-color: green;

@@ -1,7 +1,7 @@
 <template>
   <div>
-    <span>Search Hospital</span>
-    <div class="container ambulence-details">
+    <span>Search Ambulance</span>
+    <div class="container">
       <div class="col-lg-12 autocomplete">
         <input
           type="text"
@@ -9,9 +9,6 @@
           name="search"
           v-on:keyup="autoComplete($event)"
         />
-        <button class="search" type="submit">
-          <i class="fa fa-search"></i>
-        </button>
       </div>
       <div class="col-lg-10 col-md-12 col-sm-12">
         <ul class="hospital-list">
@@ -177,6 +174,9 @@ export default {
   float: left;
   width: 80%;
   background: #f1f1f1;
+}
+.container {
+  margin-top: 50px;
 }
 .search {
   -webkit-box-sizing: content-box;
