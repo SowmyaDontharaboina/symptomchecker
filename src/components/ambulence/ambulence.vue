@@ -38,7 +38,7 @@
                 Address:
                 <b>{{value.address}}</b>
               </p>
-              <a href="#" class="btn btn-primary stretched-link">Book ambulence</a>
+              <a class="btn btn-primary stretched-link" @click="bookAmbulence()">Book ambulence</a>
             </div>
           </div>
         </div>
@@ -91,6 +91,26 @@ export default {
           //this.filteredValues.push(ele[keyVal][0]);
           console.log(this.filteredValues);
         }
+      });
+    },
+    bookAmbulence() {
+      var self = this;
+      this.$swal({
+        title: `
+          <i>
+            Your Ambulance is Booked.
+          </i>
+          `,
+        // add a custom html tags by defining a html method.
+        html:
+          `<small>
+            It will reach in 15min.
+            </small>
+            `,
+        showCloseButton: true,
+        focusConfirm: false,
+      }).then(result => {
+        this.$router.push('/')
       });
     },
     onSelection(val) {
