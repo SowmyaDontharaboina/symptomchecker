@@ -1,10 +1,18 @@
 <section class="section">
     <div class="container">
         <div class="columns">
+            <div class="navbar">
+                <nav class="nav-extended indigo darken-2">
+                    <div class="nav-content">
+                        <router-link to>
+                            <span class="nav-title">Symptom Checker</span>
+                        </router-link>
+                    </div>
+                </nav>
+            </div>
             <div class="column is-8 is-offset-2">
-                <horizontal-stepper :steps="demoSteps" @completed-step="completeStep"
-                                    @active-step="isStepActive" @stepper-finished="finish"
-                >                     
+                <horizontal-stepper :steps="demoSteps" @completed-step="completeStep" @active-step="isStepActive"
+                    @stepper-finished="finish">
                 </horizontal-stepper>
             </div>
         </div>

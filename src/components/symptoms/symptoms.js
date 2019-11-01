@@ -1,6 +1,7 @@
 import HorizontalStepper from 'vue-stepper';
 
 // This components will have the content for each stepper step.
+import Navbar from '../Navbar/Navbar.vue';
 import StepZero from './StepZero.vue';
 import StepOne from './StepOne.vue';
 import StepTwo from './StepTwo.vue';
@@ -9,7 +10,8 @@ import StepFour from './StepFour.vue';
 
 export default {
     components: {
-        HorizontalStepper
+        HorizontalStepper,
+        Navbar
     },
     data() {
         return {
