@@ -25,6 +25,9 @@
               height="150"
               :src="require(`@/assets/${item.gender}.png`)"
               :alt="item.gender"
+              style="
+    background: #f7f6f4;
+"
             />
             <span>{{item.gender}}</span>
           </label>
@@ -175,6 +178,7 @@ export default {
 .selected {
   background: blue !important;
 }
+
 .header {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   font-size: 20px;

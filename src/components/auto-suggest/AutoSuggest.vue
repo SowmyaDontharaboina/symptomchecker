@@ -58,7 +58,6 @@ export default {
 </script>
 <style scoped>
 .symptom-list {
-  text-align: left;
   display: inline;
 }
 .list {
