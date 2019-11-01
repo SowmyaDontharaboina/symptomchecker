@@ -103,15 +103,14 @@ export default {
           </i>
           `,
         // add a custom html tags by defining a html method.
-        html:
-          `<small>
+        html: `<small>
             It will reach in 15min.
             </small>
             `,
         showCloseButton: true,
-        focusConfirm: false,
+        focusConfirm: false
       }).then(result => {
-        this.$router.push('/')
+        this.$router.push("/");
       });
     },
     onSelection(val) {
