@@ -1,6 +1,7 @@
 import HorizontalStepper from 'vue-stepper';
 
 // This components will have the content for each stepper step.
+import StepZero from './StepZero.vue';
 import StepOne from './StepOne.vue';
 import StepTwo from './StepTwo.vue';
 import StepThree from './StepThree.vue';
@@ -13,6 +14,15 @@ export default {
     data() {
         return {
             demoSteps: [
+                {
+                    icon: 'person',
+                    name: 'zero',
+                    title: 'Introduction',
+                    subtitle: '',
+                    component: StepZero,
+                    completed: false
+
+                },
                 {
                     icon: 'person',
                     name: 'first',

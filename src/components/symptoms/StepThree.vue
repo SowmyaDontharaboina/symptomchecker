@@ -7,7 +7,13 @@
           <tr v-for="(question, indexVal) in questions" :key="question.question">
             <td>{{ question.question }}</td>
             <td v-for="(option, index) in question.options" :key="index">
-              <input class="form-check-input" type="radio" :name="`option${indexVal}`" :id="`option${index}`" :value="option" />
+              <input
+                class="form-check-input"
+                type="radio"
+                :name="`option${indexVal}`"
+                :id="`option${index}`"
+                :value="option"
+              />
               <label class="form-check-label" :for="`option${index}`">{{ option }}</label>
             </td>
           </tr>
@@ -47,8 +53,9 @@ export default {
 };
 </script>
 <style scoped>
-  [type="radio"]:not(:checked), [type="radio"]:checked {
-    opacity: 1;
-    pointer-events: all;
-  }
+[type="radio"]:not(:checked),
+[type="radio"]:checked {
+  opacity: 1;
+  pointer-events: all;
+}
 </style>

@@ -1,8 +1,7 @@
 <template>
   <form>
-    <h2>Add your symptoms</h2>
+    <h2 class="header">Please add your symptoms</h2>
     <div class="symptoms-details">
-      <h4>Please use the search or click on the body model.</h4>
       <div class="col-lg-12 autocomplete">
         <input
           type="text"
@@ -10,7 +9,7 @@
           name="search"
           v-on:keyup="autoComplete($event)"
         />
-        <button class="search" type="submit">
+        <button class="search">
           <i class="fa fa-search"></i>
         </button>
       </div>
@@ -64,6 +63,15 @@ export default {
   width: 50%;
   margin: 20px;
 }
+.subtitle {
+  font-size: 22px;
+}
+.header {
+  font-size: 20px;
+  margin-top: 40px;
+  text-align: left;
+  margin-left: 30px;
+}
 .symptoms-details input[type="text"] {
   padding: 10px;
   font-size: 17px;
@@ -80,5 +88,8 @@ export default {
   border: 1px solid grey;
   padding: 10px;
   display: block;
+}
+.autocomplete {
+  padding-bottom: 0;
 }
 </style>

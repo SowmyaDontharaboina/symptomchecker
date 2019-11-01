@@ -38,7 +38,7 @@
                 Address:
                 <b>{{value.address}}</b>
               </p>
-              <a href="#" class="btn btn-primary stretched-link">Book ambulence</a>
+              <a href="#" class="btn btn-primary stretched-link" @click="showDetail">Book ambulence</a>
             </div>
           </div>
         </div>
@@ -49,6 +49,7 @@
 <script>
 import db from "@/firebase/init";
 import AutoSuggest from "../auto-suggest/AutoSuggest";
+import Swal from "sweetalert2";
 export default {
   data() {
     return {
@@ -123,6 +124,24 @@ export default {
       if (this.hospitalSelected.length <= 0) {
         this.$emit("can-continue", { value: false });
       }
+    },
+    showDetail: function() {
+      this.$swal({
+        // add a custom html tags by defining a html method.
+        html: `<small>
+            Ambulence Booking
+            </small>
+            <hr/>
+            <input placeholder="Enter the pickup time" type="text" />
+            <input placeholder="address" type="text" />
+            `,
+        showCloseButton: true,
+        focusConfirm: false
+      }).then(result => {
+        if (result.value) {
+          Swal.fire("Booked!", this.$router.push("welcome"), "success");
+        }
+      });
     }
   }
 };

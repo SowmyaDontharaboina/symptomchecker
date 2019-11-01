@@ -1,10 +1,13 @@
 <template>
   <div>
-    <div class="col-lg-10 col-md-12 col-sm-12">
-      <ul class="symptom-list">
-        <li v-for="(value,index) in symptom" v-bind:key="index">
-          <span @click="onSelection(value)">{{value}}</span>
-        </li>
+    <div class="col-lg-10 col-md-12 col-sm-12 list">
+      <ul class="symptom-list list-group">
+        <li
+          v-for="(value,index) in symptom"
+          v-bind:key="index"
+          class="list-group-item"
+          @click="onSelection(value)"
+        >{{value}}</li>
       </ul>
     </div>
     <div class="col-lg-10 col-md-12 col-sm-12">
@@ -35,7 +38,7 @@ export default {
         this.active = true;
         this.symptomSelected.push(val);
         this.$emit("can-continue", { value: true });
-      } 
+      }
     },
     removeValue(val) {
       this.symptomSelected.filter((ele, index) => {
@@ -43,7 +46,7 @@ export default {
           this.symptomSelected.splice(index, 1);
         }
       });
-      if(this.symptomSelected.length <= 0){
+      if (this.symptomSelected.length <= 0) {
         this.$emit("can-continue", { value: false });
       }
     }
@@ -56,6 +59,10 @@ export default {
 <style scoped>
 .symptom-list {
   text-align: left;
+  display: inline;
+}
+.list {
+  padding: 0 12px 12px;
 }
 .symptom-list li {
   padding-bottom: 10px;
