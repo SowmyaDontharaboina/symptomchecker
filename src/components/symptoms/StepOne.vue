@@ -2,7 +2,11 @@
   <div>
     <v-app class="wizard-one" id="details">
       <form name="form-details">
-        <div class="patient-gender" v-bind:class="{activeDiv: isActive,notactive: prevSection}" v-show="showFirst">
+        <div
+          class="patient-gender"
+          v-bind:class="{activeDiv: isActive,notactive: prevSection}"
+          v-show="showFirst"
+        >
           <h2 class="header">Please select your sex</h2>
           <label
             class="gender"
@@ -44,7 +48,7 @@
                 type="range"
                 min="1"
                 max="100"
-                value="50"
+                value="22"
                 class="slider"
                 id="myRange"
                 v-on:input="getValue($event)"
@@ -118,17 +122,17 @@ export default {
       this.nextActive();
     },
     addValue() {
-      if(this.ageValue < 100) {
+      if (this.ageValue < 100) {
         this.ageValue = parseInt(this.ageValue) + 1;
         this.nextActive();
       }
     },
-    goBack () {
+    goBack() {
       this.showFirst = true;
       this.showSecond = false;
     },
     minusValue() {
-      if(this.ageValue > 1) {
+      if (this.ageValue > 1) {
         this.ageValue = parseInt(this.ageValue) - 1;
         this.nextActive();
       }

@@ -1,60 +1,227 @@
 <template>
-   <div id="app" class="container">
-  <v-app id="inspire">
-    <v-card>
-      <v-toolbar
-        flat
-        color="blue"
-        dark
-      >
-        <v-toolbar-title>Available doctors</v-toolbar-title>
-      </v-toolbar>
-      <div class="card" v-for="doctor in doctorsList">
-  
-                <div class="card-con">
-                  
-                  <div >
-                    <strong>{{ doctor.name}}</strong>
-                    <div>{{ doctor.description}}</div>
-                  </div>
-                  <div class="my-2">
-              <v-btn x-large color="success" dark v-on:click="bookAppointment">Book Appointment</v-btn>
+  <div id="app" class="container">
+    <div>
+      <div class="container doctor-details">
+        <span>Search Location</span>
+        <div class="col-lg-12 autocomplete">
+          <input
+            type="text"
+            placeholder="Enter your location, e.g. Hyderabad"
+            name="search"
+            v-on:keyup="autoComplete($event)"
+          />
+          <button class="search" type="submit">
+            <i class="fa fa-search"></i>
+          </button>
+        </div>
+        <div class="col-lg-10 col-md-12 col-sm-12">
+          <ul class="hospital-list">
+            <li v-for="(value,index) in filteredValues" v-bind:key="index">
+              <span @click="onSelection(value)">{{value}}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="container doctor-name" v-show="active">
+        <div class="row">
+          <div class="col-lg-12">
+            <h2>Hospitals Near By {{hospitalSelected}}</h2>
+            <p>Below the name and address</p>
+            <div
+              class="card"
+              :class="{selectedlist: active}"
+              v-for="(value,index) in selectedLocation"
+              v-bind:key="index"
+              style="width:400px"
+            >
+              <div class="card-body">
+                <h4 class="card-title">
+                  Location:
+                  <b class="name-doc">{{value.name}}</b>
+                </h4>
+                <h3 class="card-title">
+                  Doctor Name:
+                  <b class="name-doc">{{value.doctorname}}</b>
+                </h3>
+                <h3 class="card-title">
+                  Specialist In:
+                  <b class="name-doc">{{value.specialist}}</b>
+                </h3>
+                <p class="card-title">
+                  Address:
+                  <b class="name-doc">{{value.address}}</b>
+                </p>
+                <a class="btn btn-primary stretched-link" @click="bookAmbulence()">Book Appointment</a>
+              </div>
             </div>
-                </div>
+          </div>
+        </div>
+      </div>
     </div>
-  
-      
-    </v-card>
-  </v-app>
-</div>
+  </div>
 </template>
 <script>
 import db from "@/firebase/init";
-
+import AutoSuggest from "../auto-suggest/AutoSuggest";
+import Swal from "sweetalert2";
 export default {
-  name: 'doctors',
   data() {
     return {
-      doctorsList:[]
-    }
+      list: [],
+      filteredValues: [],
+      hospitalSelected: "",
+      selectedLocation: [],
+      oneHospital: false,
+      active: false
+    };
   },
-  methods: {
-      bookAppointment() {
-          this.$swal('Appointment', 'You Successfully booked appointment', 'OK').then(result => {
-        this.$router.push('/')
-      });
-      }
+  components: {
+    AutoSuggest
   },
   created() {
     let self = this;
-    db.collection("Doctors")
+    db.collection("hospitalList")
       .get()
       .then(snapshot => {
         snapshot.docs.forEach(doc => {
-          let doctors = doc.data();
-          self.doctorsList = doctors.DoctorsList;
+          let hospitals = doc.data();
+          self.list = hospitals.locations;
+          // alert(self.list[0].name);
         });
       });
+  },
+  methods: {
+    autoComplete($event) {
+      this.filteredValues = [];
+      let value = $event.target.value.toLowerCase();
+      this.list.forEach((ele, index) => {
+        if (
+          Object.keys(ele)[0]
+            .toLowerCase()
+            .includes(value) &&
+          value != ""
+        ) {
+          //const keyVal = Object.keys(ele)[0];
+          this.filteredValues.push(Object.keys(ele)[0]);
+          //this.filteredValues.push(ele[keyVal][0]);
+          console.log(this.filteredValues);
+        }
+      });
+    },
+    bookAmbulence() {
+      var self = this;
+      this.$swal({
+        title: `
+          <i>
+            You have succesffuly booked an Appointment.
+          </i>
+          `,
+        // add a custom html tags by defining a html method.
+        showCloseButton: true,
+        focusConfirm: false
+      }).then(result => {
+        this.$router.push("/");
+      });
+    },
+    onSelection(val) {
+      if (val) {
+        this.hospitalSelected = "";
+        this.active = true;
+        this.oneHospital = true;
+        this.hospitalSelected = val;
+        this.$emit("can-continue", { value: true });
+        this.list.forEach((ele, index) => {
+          if (
+            Object.keys(ele)[0].includes(this.hospitalSelected) &&
+            val != ""
+          ) {
+            const keyVal = Object.keys(ele)[0];
+            this.selectedLocation = ele[keyVal];
+            // });
+            //this.filteredValues.push(ele[keyVal][0]);
+            //alert(this.selectedLocation);
+          }
+        });
+      }
+    },
+    removeValue(val) {
+      this.hospitalSelected.filter((ele, index) => {
+        if (ele.name === val) {
+          this.hospitalSelected.splice(index, 1);
+        }
+      });
+      if (this.hospitalSelected.length <= 0) {
+        this.$emit("can-continue", { value: false });
+      }
+    },
+    showDetail: function() {
+      this.$swal({
+        // add a custom html tags by defining a html method.
+        html: `<small>
+            Ambulence Booking
+            </small>
+            <hr/>
+            <input placeholder="Enter the pickup time" type="text" />
+            <input placeholder="address" type="text" />
+            `,
+        showCloseButton: true,
+        focusConfirm: false
+      }).then(result => {
+        if (result.value) {
+          Swal.fire("Booked!", this.$router.push("welcome"), "success");
+        }
+      });
+    }
   }
 };
 </script>
+<style lang="scss" scoped>
+.doctor-details {
+  width: 50%;
+  margin: 20px;
+}
+.doctor-details input[type="text"] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  background: #f1f1f1;
+}
+.search {
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 3rem;
+  background: #f1f1f1;
+  border: 1px solid grey;
+  padding: 10px;
+  display: block;
+}
+.card {
+  display: inline-block !important;
+}
+.hospital-list {
+  text-align: left;
+}
+.hospital-list li {
+  padding-bottom: 10px;
+  cursor: pointer;
+}
+.card.selectedlist {
+  margin-left: 20px;
+}
+.name-doc {
+  font-weight: 500;
+}
+.btn-primary {
+  background-color: green;
+  border-color: green;
+  color: white;
+}
+.container.doctor-name {
+  border: 2px solid green;
+}
+.btn-primary:hover {
+  background-color: green;
+}
+</style>
